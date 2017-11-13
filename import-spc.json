@@ -1,0 +1,11 @@
+{
+    "SPC": {
+        "datatypes": {
+            "raman": {},
+            "ftir": {}
+        },
+        "extensions": {
+            "spc": {}
+        }    
+    }
+}
