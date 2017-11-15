@@ -15,4 +15,19 @@ Find your Entropy installation directory and copy the SPC directory to
 Make sure the http-server has read permissions to this directory and its contents
 
 ## Register the plugin
+Add the following section to the end of import configuration file, usually stored in {Entropy installation directory}/data/config/import.json. Make sure the result is a valid JSON file.
 
+```
+"SPC": {
+        "datatypes": {
+            "raman": {},
+            "ftir": {}
+        },
+        "extensions": {
+            "spc": {}
+        }    
+}
+```
+
+## Remark
+Updating Entropy using its setup.php tool will remove the SPC directory.
