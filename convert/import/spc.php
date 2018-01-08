@@ -1,13 +1,8 @@
 <?php
 
-// prevent direct access to this file (thus only when included)
-if (count(get_included_files()) == 1) {
-    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-    header("Status: 404 Not Found");
-    exit("Direct access not permitted.");
-}
+namespace Convert\Import;
 
-class ImportSPC
+class Spc
 {
     public $data = array();
     public $meta = array();
@@ -26,7 +21,7 @@ class ImportSPC
         // if $file is a filename, open it as handle and read line by line
         // if $file is an array, foreach through it
         if (!is_array($file)) {
-            $lastLine = exec("python ". PRIVPATH . "import/SPC/convert.py \"" . $file . "\"", $response);
+            $lastLine = exec("python ". PRIVPATH . "convert/import/spc/convert.py \"" . $file . "\"", $response);
             if (!empty($response)) {
                 $file = $response;
             } else {
@@ -40,9 +35,9 @@ class ImportSPC
         if (is_array($file)) {
             // check if successful, and if so, use the ImportASCII class to read the output
             if ($lastLine == "Converted") {
-                $imported = new ImportASCII($file, $parameters);
-                $this->data = $imported->getData();
-                $this->error = $imported->getError();
+                $importAscii = new Convert\Import\Ascii($file, $parameters);
+                $this->data = $importAscii->getData();
+                $this->error = $importAscii->getError();
             } else {
                 eventLog("WARNING", "Response from external SPC convertor: " . $lastLine, false);
                 $this->error = "Response from external SPC convertor: " . $lastLine;
