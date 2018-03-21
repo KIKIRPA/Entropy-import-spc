@@ -35,7 +35,7 @@ class Spc
         if (is_array($file)) {
             // check if successful, and if so, use the ImportASCII class to read the output
             if ($lastLine == "Converted") {
-                $importAscii = new Convert\Import\Ascii($file, $parameters);
+                $importAscii = new Ascii($file, $parameters); //same namespace!
                 $this->data = $importAscii->getData();
                 $this->error = $importAscii->getError();
             } else {
